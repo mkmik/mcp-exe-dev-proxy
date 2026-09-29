@@ -1,0 +1,18 @@
+[Unit]
+Description=MCP OAuth proxy (exe.dev login)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/mcp-exe-dev-proxy serve -config /etc/mcp-exe-dev-proxy/config.yaml
+Restart=on-failure
+DynamicUser=yes
+StateDirectory=mcp-exe-dev-proxy
+ConfigurationDirectory=mcp-exe-dev-proxy
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

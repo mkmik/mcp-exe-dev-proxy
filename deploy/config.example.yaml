@@ -1,0 +1,24 @@
+# Public URL of this proxy on exe.dev. It is the OAuth issuer and the
+# protected resource; it must not have a path.
+public_url: https://clickmem.myvm.exe.xyz
+# Port exe.dev's HTTPS front forwards to.
+listen: 127.0.0.1:8000
+# The MCP server being protected. Keep it bound to 127.0.0.1.
+upstream: http://127.0.0.1:9527
+# exe.dev user IDs or emails allowed to log in.
+allowed_users:
+  - you@example.com
+# SSH keys allowed to authenticate with SSHSIG (for hooks, agents, scripts).
+# The key comment is passed upstream as X-Forwarded-User.
+authorized_keys: /etc/mcp-exe-dev-proxy/authorized_keys
+db: /var/lib/mcp-exe-dev-proxy/state.db
+access_token_ttl: 1h
+refresh_token_ttl: 720h
+
+# Optional:
+# allowed_redirect_uris:        # exact redirect URIs accepted at registration;
+#   - https://claude.ai/api/mcp/auth_callback   # loopback URIs are always allowed
+#   - https://claude.com/api/mcp/auth_callback
+# rate_limit: 1                 # per-IP requests/second on OAuth endpoints
+# rate_burst: 30
+# sse_keepalive: 25s            # negative disables
